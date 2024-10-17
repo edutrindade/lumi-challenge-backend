@@ -1,4 +1,3 @@
-// src/routes/clientRoutes.ts
 import { FastifyInstance } from 'fastify'
 import { ClientController, ClientRequestBody } from '@/controllers/clientController'
 
