@@ -1,5 +1,8 @@
 import Fastify from 'fastify'
 import { PrismaClient } from '@prisma/client'
+import { addressRoutes } from '@/routes/addressRoutes'
+import { clientRoutes } from '@/routes/clientRoutes'
+import { invoiceRoutes } from '@/routes/invoiceRoutes'
 
 const prisma = new PrismaClient()
 const server = Fastify()
@@ -16,6 +19,10 @@ server.get('/healthcheck', async (request, reply) => {
       reply.status(500).send({ error: 'Database connection failed' })
    }
 })
+
+server.register(clientRoutes, { prefix: '/api/clients' })
+server.register(invoiceRoutes, { prefix: '/api/invoices' })
+server.register(addressRoutes, { prefix: '/api/addresses' })
 
 export const startServer = async () => {
    try {
