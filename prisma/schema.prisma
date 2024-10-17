@@ -19,11 +19,13 @@ model Invoice {
     class               String?
     energyAmountKwh     Float
     energyValue         Float
-    energySCEEEKwh      Float
-    energySCEEValue     Float
-    compensatedGDIKwh   Float
-    compensatedGDIValue Float
+    energySCEEEKwh      Float?
+    energySCEEValue     Float?
+    compensatedGDIKwh   Float?
+    compensatedGDIValue Float?
     publicLightingValue Float
+    fineForDelay        Float?
+    redFlagValue        Float?
     lastReadingDate     DateTime?
     readingDate         DateTime
     nextReadingDate     DateTime?
@@ -46,7 +48,7 @@ model Address {
 
 model Client {
     id           String    @id @default(uuid())
-    clientNumber String
+    clientNumber String    @unique
     name         String
     cpfCnpj      String    @unique
     phoneNumber  String?
