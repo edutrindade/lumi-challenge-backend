@@ -1,4 +1,3 @@
-// src/controllers/clientController.ts
 import { ClientService } from '@/services/clientService'
 import { FastifyRequest, FastifyReply } from 'fastify'
 
