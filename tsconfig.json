@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+      "module": "NodeNext",
+      "target": "ESNext",
+      "moduleResolution": "NodeNext",
+      "strict": true,
+      "strictNullChecks": false,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "resolveJsonModule": true,
+      "noImplicitAny": false,
+      "rootDirs": ["src", "tests"],
+      "outDir": "dist",
+      "baseUrl": "src",
+      "paths": {
+        "@/*": ["*"],
+        "@tests/*": ["../tests/*"],
+        },
+  },
+  "include": [
+      "src"
+  ],
+  "env": {
+      "node": true
+  },
+}
