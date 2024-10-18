@@ -9,7 +9,7 @@ export class AddressService {
    }
 
    static async getAllAddresses(): Promise<Address[]> {
-      return prisma.address.findMany()
+      return prisma.address.findMany({ include: { clients: true } })
    }
 
    static async getAddressById(id: string): Promise<Address | null> {
