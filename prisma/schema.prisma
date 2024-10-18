@@ -25,7 +25,6 @@ model Invoice {
     compensatedGDIValue Float?
     publicLightingValue Float
     fineForDelay        Float?
-    redFlagValue        Float?
     lastReadingDate     DateTime?
     readingDate         DateTime
     nextReadingDate     DateTime?
@@ -51,8 +50,6 @@ model Client {
     clientNumber String    @unique
     name         String
     cpfCnpj      String    @unique
-    phoneNumber  String?
-    email        String?
     address      Address?  @relation(fields: [addressId], references: [id])
     addressId    String?
     invoices     Invoice[]
