@@ -13,4 +13,6 @@ export async function invoiceRoutes(server: FastifyInstance) {
    server.put<{ Params: { id: string }; Body: InvoiceRequestBody }>('/:id', InvoiceController.updateInvoice)
 
    server.delete<{ Params: { id: string } }>('/:id', InvoiceController.deleteInvoice)
+
+   server.post('/process', InvoiceController.processInvoices)
 }
