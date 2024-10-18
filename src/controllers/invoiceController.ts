@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { InvoiceService } from '@/services/invoiceService'
+import { InvoiceProcessor } from '@/helpers/invoiceProcessor'
 
 interface InvoiceParams {
    id: string
@@ -175,6 +176,15 @@ export class InvoiceController {
          reply.send({ message: 'Invoice removed successfully' })
       } catch (error) {
          reply.status(404).send({ message: 'Invoice not found' })
+      }
+   }
+
+   static async processInvoices(request: FastifyRequest, reply: FastifyReply) {
+      try {
+         await InvoiceProcessor.processInvoices()
+         reply.send({ success: true, message: 'Faturas processadas com sucesso' })
+      } catch (error) {
+         reply.status(500).send({ success: false, message: 'Erro ao processar faturas', error })
       }
    }
 }
