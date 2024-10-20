@@ -88,6 +88,7 @@ export class InvoiceService {
 
          return {
             month: monthAbbreviation,
+            year,
             totalEnergyConsumed,
             totalCompensated,
             totalInvoicesValue,
