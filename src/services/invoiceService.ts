@@ -72,11 +72,11 @@ export class InvoiceService {
 
          const clients = monthlyInvoices.map((invoice) => {
             const data = this.calculateVariables(invoice)
-            totalEnergyConsumed += data.consumptionKwh
-            totalCompensated += data.compensatedEnergyKwh
-            totalInvoicesValue += data.totalValue
-            totalWithoutGD += data.totalWithoutGD
-            economyGD += data.economyGD
+            totalEnergyConsumed += data.consumptionKwh.toFixed(2)
+            totalCompensated += data.compensatedEnergyKwh.toFixed(2)
+            totalInvoicesValue += data.totalValue.toFixed(2)
+            totalWithoutGD += data.totalWithoutGD.toFixed(2)
+            economyGD += data.economyGD.toFixed(2)
 
             return {
                id: invoice.client.id,
@@ -191,10 +191,10 @@ export class InvoiceService {
 
       return {
          ...invoice,
-         consumptionKwh,
-         compensatedEnergyKwh: invoice.compensatedGDIKwh || 0,
-         totalWithoutGD,
-         economyGD: invoice.compensatedGDIValue || 0,
+         consumptionKwh: consumptionKwh.toFixed(2),
+         compensatedEnergyKwh: invoice.compensatedGDIKwh.toFixed(2) || 0,
+         totalWithoutGD: totalWithoutGD.toFixed(2),
+         economyGD: invoice.compensatedGDIValue.toFixed(2) || 0,
       }
    }
 }
