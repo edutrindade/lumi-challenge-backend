@@ -72,11 +72,11 @@ export class InvoiceService {
 
          const clients = monthlyInvoices.map((invoice) => {
             const data = this.calculateVariables(invoice)
-            totalEnergyConsumed += data.consumptionKwh.toFixed(2)
-            totalCompensated += data.compensatedEnergyKwh.toFixed(2)
-            totalInvoicesValue += data.totalValue.toFixed(2)
-            totalWithoutGD += data.totalWithoutGD.toFixed(2)
-            economyGD += data.economyGD.toFixed(2)
+            totalEnergyConsumed += data.consumptionKwh
+            totalCompensated += data.compensatedEnergyKwh
+            totalInvoicesValue += data.totalValue
+            totalWithoutGD += data.totalWithoutGD
+            economyGD += data.economyGD
 
             return {
                id: invoice.client.id,
@@ -89,11 +89,11 @@ export class InvoiceService {
          return {
             month: monthAbbreviation,
             year,
-            totalEnergyConsumed,
-            totalCompensated,
-            totalInvoicesValue,
-            totalWithoutGD,
-            economyGD,
+            totalEnergyConsumed: Number(totalEnergyConsumed.toFixed(2)),
+            totalCompensated: Number(totalCompensated.toFixed(2)),
+            totalInvoicesValue: Number(totalInvoicesValue.toFixed(2)),
+            totalWithoutGD: Number(totalWithoutGD.toFixed(2)),
+            economyGD: Number(economyGD.toFixed(2)),
             installationNumbers: monthlyInvoices.map((invoice) => invoice.installationNumber),
             clients,
          }
@@ -191,10 +191,10 @@ export class InvoiceService {
 
       return {
          ...invoice,
-         consumptionKwh: consumptionKwh.toFixed(2),
-         compensatedEnergyKwh: invoice.compensatedGDIKwh.toFixed(2) || 0,
-         totalWithoutGD: totalWithoutGD.toFixed(2),
-         economyGD: invoice.compensatedGDIValue.toFixed(2) || 0,
+         consumptionKwh,
+         compensatedEnergyKwh: invoice.compensatedGDIKwh || 0,
+         totalWithoutGD,
+         economyGD: invoice.compensatedGDIValue || 0,
       }
    }
 }
