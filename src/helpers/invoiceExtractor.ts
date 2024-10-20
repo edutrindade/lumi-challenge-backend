@@ -56,7 +56,7 @@ export async function extractInvoiceFields(text: string): Promise<InvoiceData | 
    const installationAndClientNumber = extractValueBelow(text, 'Nº DA INSTALAÇÃO') ?? ''
    const numbers = installationAndClientNumber.split(/\s+/)
 
-   invoice.installationNumber = numbers[0] ?? ''
+   invoice.installationNumber = numbers[1] ?? ''
    const headerRight = extractValueBelow(text, 'Referente a') ?? ''
 
    const parts = headerRight.trim().split(/\s+/)
@@ -153,7 +153,7 @@ export async function extractInvoiceFields(text: string): Promise<InvoiceData | 
 
    // Extração de dados do cliente
    invoice.client = {
-      clientNumber: numbers[1] ?? '',
+      clientNumber: numbers[0] ?? '',
       name: extractClientNameAboveAddress(text) ?? '',
       cpfCnpj: extractValue(text, 'CPF') ?? extractValue(text, 'CNPJ') ?? '',
    }
