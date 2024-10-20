@@ -33,6 +33,13 @@ export interface InvoiceCheckParams {
    installationNumber: string
 }
 
+export interface InvoiceDashboardParams {
+   year?: string
+   month?: string
+   installationNumber?: string
+   clientNumber?: string
+}
+
 export class InvoiceController {
    static async getAllInvoices(req: FastifyRequest, res: FastifyReply) {
       try {
@@ -186,5 +193,22 @@ export class InvoiceController {
       } catch (error) {
          reply.status(500).send({ success: false, message: 'Erro ao processar faturas', error })
       }
+   }
+
+   static async getMonthlyTotals(request: FastifyRequest<{ Querystring: InvoiceDashboardParams }>, res: FastifyReply) {
+      const { year, installationNumber, clientNumber, month } = request.query
+      const filterYear = year || new Date().getFullYear().toString()
+
+      try {
+         const monthlyTotals = await InvoiceService.getMonthlyTotals(filterYear, installationNumber, clientNumber, month)
+         return res.send(monthlyTotals)
+      } catch (error) {
+         return res.status(500).send({ error: 'Failed to fetch monthly totals' })
+      }
+   }
+
+   static async getInvoicesForDisplay(request: FastifyRequest, reply: FastifyReply) {
+      const invoices = await InvoiceService.getInvoicesForDisplay()
+      return reply.send(invoices)
    }
 }

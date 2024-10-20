@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { InvoiceCheckParams, InvoiceController, InvoiceRequestBody } from '@/controllers/invoiceController'
+import { InvoiceCheckParams, InvoiceController, InvoiceDashboardParams, InvoiceRequestBody } from '@/controllers/invoiceController'
 
 export async function invoiceRoutes(server: FastifyInstance) {
    server.post<{ Body: InvoiceRequestBody }>('/', InvoiceController.createInvoice)
@@ -15,4 +15,8 @@ export async function invoiceRoutes(server: FastifyInstance) {
    server.delete<{ Params: { id: string } }>('/:id', InvoiceController.deleteInvoice)
 
    server.post('/process', InvoiceController.processInvoices)
+
+   server.get<{ Querystring: InvoiceDashboardParams }>('/dashboard', InvoiceController.getMonthlyTotals)
+
+   server.get('/display', InvoiceController.getInvoicesForDisplay)
 }
