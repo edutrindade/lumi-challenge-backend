@@ -5,9 +5,16 @@ import { clientRoutes } from '@/routes/clientRoutes'
 import { invoiceRoutes } from '@/routes/invoiceRoutes'
 import path from 'path'
 import staticPlugin from '@fastify/static'
+import cors from 'fastify-cors'
 
 const prisma = new PrismaClient()
 const server = Fastify()
+
+server.register(cors, {
+   origin: '*',
+   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+   allowedHeaders: ['Content-Type', 'Authorization'],
+})
 
 server.register(staticPlugin, {
    root: path.join(__dirname, 'invoices'),
