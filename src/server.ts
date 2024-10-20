@@ -3,9 +3,16 @@ import { PrismaClient } from '@prisma/client'
 import { addressRoutes } from '@/routes/addressRoutes'
 import { clientRoutes } from '@/routes/clientRoutes'
 import { invoiceRoutes } from '@/routes/invoiceRoutes'
+import path from 'path'
+import staticPlugin from '@fastify/static'
 
 const prisma = new PrismaClient()
 const server = Fastify()
+
+server.register(staticPlugin, {
+   root: path.join(__dirname, 'invoices'),
+   prefix: '/invoices/',
+})
 
 server.get('/healthcheck', async (request, reply) => {
    try {
@@ -26,7 +33,7 @@ server.register(addressRoutes, { prefix: '/api/addresses' })
 
 export const startServer = async () => {
    try {
-      const PORT = process.env.PORT || 3000
+      const PORT = process.env.PORT || 3333
       await server.listen({ port: Number(PORT), host: '0.0.0.0' })
 
       console.log(`Server running at http://localhost:${PORT} 🚀`)
