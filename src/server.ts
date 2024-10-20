@@ -5,7 +5,7 @@ import { clientRoutes } from '@/routes/clientRoutes'
 import { invoiceRoutes } from '@/routes/invoiceRoutes'
 import path from 'path'
 import staticPlugin from '@fastify/static'
-import cors from 'fastify-cors'
+import cors from '@fastify/cors'
 
 const prisma = new PrismaClient()
 const server = Fastify()
