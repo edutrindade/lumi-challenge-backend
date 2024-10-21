@@ -6,6 +6,8 @@ import { invoiceRoutes } from '@/routes/invoiceRoutes'
 import path from 'path'
 import staticPlugin from '@fastify/static'
 import cors from '@fastify/cors'
+import fastifySwagger from '@fastify/swagger'
+import fastifySwaggerUi from '@fastify/swagger-ui'
 
 const prisma = new PrismaClient()
 const server = Fastify()
@@ -19,6 +21,42 @@ server.register(cors, {
 server.register(staticPlugin, {
    root: path.join(__dirname, 'invoices'),
    prefix: '/invoices/',
+})
+
+server.register(fastifySwagger, {
+   swagger: {
+      info: {
+         title: 'API Documentation',
+         description: 'API do sistema com rotas para clientes, faturas e endereços',
+         version: '1.0.0',
+      },
+      host: 'lumi-challenge-backend.onrender.com',
+      schemes: process.env.BASE_URL ? ['https'] : ['http'],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+   },
+})
+
+server.register(fastifySwaggerUi, {
+   routePrefix: '/documentation',
+   uiConfig: {
+      docExpansion: 'full',
+      deepLinking: false,
+   },
+   uiHooks: {
+      onRequest: function (request, reply, next) {
+         next()
+      },
+      preHandler: function (request, reply, next) {
+         next()
+      },
+   },
+   staticCSP: true,
+   transformStaticCSP: (header) => header,
+   transformSpecification: (swaggerObject, request, reply) => {
+      return swaggerObject
+   },
+   transformSpecificationClone: true,
 })
 
 server.get('/healthcheck', async (request, reply) => {
@@ -44,6 +82,7 @@ export const startServer = async () => {
       await server.listen({ port: Number(PORT), host: '0.0.0.0' })
 
       console.log(`Server running at http://localhost:${PORT} 🚀`)
+      server.swagger()
    } catch (err) {
       console.log(err)
       process.exit(1)

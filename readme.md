@@ -1,4 +1,6 @@
-![](https://uploads-ssl.webflow.com/62f9249c43126cafce10bc33/62ffcb77b4351b3d229aa6a9_logo-lumi-green.svg)
+![img](https://uploads-ssl.webflow.com/62f9249c43126cafce10bc33/62ffcb77b4351b3d229aa6a9_logo-lumi-green.svg)
+
+# Lumi Challenge Backend
 
 Este projeto é o backend para o teste prático da **Lumi**, um sistema de processamento de faturas de energia elétrica da CEMIG (Companhia Energética de Minas Gerais). O sistema lê faturas em formato PDF e popula as tabelas no banco de dados PostgreSQL de acordo com o modelo sugerido, extraindo dados como informações da fatura, valores de energia, consumo, multas por atraso, e informações do cliente. Pelo curto prazo, os arquivos disponibilizados foram colocados no projeto de maneira estática para download. Com um prazo maior poderia ter feito uma integração com o Google Drive e salvar a URL ou ID do arquivo em tempo de leitura.
 
@@ -139,7 +141,7 @@ Os dados do cliente são organizados com informações básicas e a relação co
 
 ## Aplicação Web
 
-Este projeto é complementado por uma **Aplicação Web** onde será possível visualizar os dados processados de forma mais intuitiva e detalhada. A dashboard faz parte deste mesmo ecossistema, permitindo a visualização das faturas processadas e outras funcionalidades relacionadas.
+Este projeto é complementado por uma **Aplicação Web** onde será possível visualizar os dados processados de forma mais intuitiva e detalhada. A dashboard faz parte deste mesmo ecossistema, permitindo a visualização das faturas processadas e outras funcionalidades relacionadas. Pode ser visualizada clicando [aqui](https://lumi-challenge-frontend.vercel.app/).
 
 **Sobre o Desenvolvedor**
 
